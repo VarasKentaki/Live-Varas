@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aplicación segura para gestionar notas privadas en el navegador.">
+  <meta name="keywords" content="notas privadas, gestor de notas, app segura, frontend">
+  <meta name="author" content="Tu Nombre">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="color-scheme" content="dark light">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <!-- Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy"
+        content="
+          default-src 'self';
+          script-src 'self';
+          style-src 'self' https://fonts.googleapis.com;
+          font-src https://fonts.gstatic.com;
+          img-src 'self' data:;
+          object-src 'none';
+          base-uri 'self';
+          form-action 'self';
+          frame-ancestors 'none';
+        ">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Gestor de Notas Privadas">
+  <meta property="og:description" content="Gestiona tus notas privadas de forma segura en tu navegador.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://tu-dominio.com/preview.png">
+  <meta property="og:url" content="https://tu-dominio.com">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Gestor de Notas Privadas">
+  <meta name="twitter:description" content="App segura de notas privadas en frontend.">
+  <meta name="twitter:image" content="https://tu-dominio.com/preview.png">
+
+  <title>Gestor de Notas Privadas</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="app">
+
+  <!-- Theme Toggle -->
+  <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">
+    🌙
+  </button>
+  <button id="demon-mode-toggle" class="demon-toggle" aria-label="Activar modo demonio">
+    😈
+  </button>
+  <button id="brechaBtn" class="brecha-btn">
+    ⚠️ Detectar Brecha de Seguridad
+  </button>
+  
+  <div id="troleoOverlay" class="troleo-overlay">
+    <img src="troleado.png" alt="Troleo" class="troleo-img">
+  </div>
+  <!-- AUTH VIEW -->
+  <section id="auth-view" class="view active">
+    <div class="card auth-card">
+
+      <div id="login-container">
+        <h1>Iniciar Sesión</h1>
+        <form id="login-form" novalidate autocomplete="off">
+          <input type="email" id="login-email" placeholder="Email" required>
+          <input type="password" id="login-password" placeholder="Contraseña" required minlength="6">
+          <button class="btn primary" type="submit">Entrar</button>
+        </form>
+        <p>
+          ¿No tienes cuenta?
+          <button id="show-register" class="link-btn" type="button">
+            Crear cuenta
+          </button>
+        </p>
+      </div>
+
+      <div id="register-container" class="hidden">
+        <h1>Crear Cuenta</h1>
+        <form id="register-form" novalidate autocomplete="off">
+          <input type="email" id="register-email" placeholder="Email" required>
+          <input type="password" id="register-password" placeholder="Contraseña" required minlength="6">
+          <input type="password" id="register-confirm" placeholder="Confirmar contraseña" required minlength="6">
+          <button class="btn primary" type="submit">Registrar</button>
+        </form>
+        <p>
+          ¿Ya tienes cuenta?
+          <button id="show-login" class="link-btn" type="button">
+            Iniciar sesión
+          </button>
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section id="dashboard-view" class="view hidden">
+    <header class="dashboard-header">
+      <h1>Mis Notas</h1>
+      <div>
+        <button id="new-note" class="btn primary">+ Nueva nota</button>
+        <button id="logout" class="btn ghost">Cerrar sesión</button>
+      </div>
+    </header>
+    <div id="notes-grid" class="notes-grid"></div>
+  </section>
+
+  <!-- FORM -->
+  <section id="note-form-view" class="view hidden">
+    <div class="card">
+      <h2 id="form-title">Nueva Nota</h2>
+      <form id="note-form">
+        <input type="text" id="note-title" placeholder="Título" required maxlength="100">
+        <textarea id="note-content" rows="6" placeholder="Contenido" required maxlength="2000"></textarea>
+        <div class="actions">
+          <button class="btn primary" type="submit">Guardar</button>
+          <button class="btn ghost" type="button" id="cancel-note">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- DETAIL -->
+  <section id="note-detail-view" class="view hidden">
+    <div class="card">
+      <h2 id="detail-title"></h2>
+      <p id="detail-date" class="date"></p>
+      <p id="detail-content"></p>
+      <div class="actions">
+        <button id="edit-note" class="btn primary">Editar</button>
+        <button id="delete-note" class="btn danger">Eliminar</button>
+        <button id="back-dashboard" class="btn ghost">Volver</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="script.js" defer></script>
+</body>
+</html>
