@@ -1,18 +1,16 @@
-# Usa una imagen ligera de Node
-FROM node:18-alpine
+FROM node:18
 
-# Crea el directorio de trabajo
 WORKDIR /app
 
-# Copia los archivos de dependencias y las instala
+# Copiamos solo package.json primero
 COPY package*.json ./
+
+# Instalamos dependencias DENTRO del contenedor
 RUN npm install
 
-# Copia el resto del código
+# Ahora copiamos el resto del código
 COPY . .
 
-# Expone el puerto que usa tu app
 EXPOSE 3000
 
-# Comando para arrancar la app
-CMD ["node", "app.js"]
+CMD ["sh", "-c", "npm install && node server.js"]
